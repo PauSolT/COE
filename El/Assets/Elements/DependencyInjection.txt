@@ -1,0 +1,94 @@
+public static class ServiceLocator
+{
+    private static List<IService> services = new List<IService>();
+
+    public static void AddService(IService service)
+    {
+        services.Add(service);
+    }
+
+    public static IService GetService<T>()
+    {
+        return null;
+    }
+}
+
+public interface IService
+{
+    public void Dispose();
+}
+
+public class CombatService : IService
+{
+    AudioService audioService = null;
+    List<PlayerController> playerControllers;
+
+    public void Dispose()
+    {
+
+    }
+
+    private void Init()
+    {
+        audioService = ServiceLocator.GetService<AudioService>();
+    }
+
+
+}
+
+public class AudioService : IService
+{
+    public void Dispose()
+    {
+
+    }
+}
+
+public class GameInit : MonoBehaviour
+{
+    CombatService combatService = null;
+    AudioService audioService = null;
+
+    private void Awake()
+    {
+        combatService = new CombatService();
+        ServiceLocator.AddService(combatService);
+        audioService = new AudioService();
+        ServiceLocator.AddService(audioService);
+    }
+}
+
+public class PlayerController
+{
+    PlayerView 
+}
+
+public class PlayerView : MonoBehaviour
+{
+    private void WalkAnimation()
+    {
+
+    }
+}
+
+public class PlayerDataModel
+{
+
+}
+
+
+public class PlayerInstanceModel
+{
+    int CurrentPlayerHealth;
+
+
+    public void Load()
+    {
+
+    }
+
+    public void Save()
+    {
+
+    }
+}
